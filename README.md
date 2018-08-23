@@ -29,7 +29,7 @@ Token类合约必须包含accounts表和stat表，分别提供用户余额查询
 ```
 struct account {
     asset    balance;
-    
+
     uint64_t primary_key()const { return balance.symbol.name(); }
 };
 ```
@@ -65,6 +65,10 @@ struct currency_stats {
 2. 包含适当的李嘉图合约
 3. 通过第三方安全团队的审核
 4. resign权限
+
+**审计流程**
+![audit_flow](https://raw.githubusercontent.com/hb-chengli/ecs/master/audit_flow.jpg)
+
 
 ## 更新
 每次更新合约之后，需要重新进行审计流程。
