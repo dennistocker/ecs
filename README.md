@@ -67,6 +67,7 @@ struct currency_stats {
 4. resign权限
 
 **审计流程**
+
 ![audit_flow](https://raw.githubusercontent.com/hb-chengli/ecs/master/audit_flow.jpg)
 
 
