@@ -17,8 +17,8 @@ void transfer( account_name from, account_name to, asset quantity, string memo )
 **说明**
 1. 对于transfer接口，要求所有资产转移必须在链上可查询，包括用于余额变化、收取交易费用等。
 2. Token的symbol需满足EOS对symbol的要求
-    1 必须全部是大写字母（A-Z）
-    2 长度小于等于7位
+    * 必须全部是大写字母（A-Z）
+    * 长度小于等于7位
 3. 对于有发行进度限制的token，建议在issue接口中进行限制
 4. 对于有锁定功能的token，建议在accounts表（见数据表设计）中同时记录用户余额和可用余额，并提供接口进行查询
 
