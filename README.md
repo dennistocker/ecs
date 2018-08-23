@@ -70,6 +70,9 @@ struct currency_stats {
 
 ![audit_flow](https://raw.githubusercontent.com/hb-chengli/ecs/master/audit_flow.jpg)
 
+*TODO*
+
+conrtacts checking
 
 ## 更新
 每次更新合约之后，需要重新进行审计流程。
