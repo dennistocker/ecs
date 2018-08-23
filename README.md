@@ -70,7 +70,7 @@ struct currency_stats {
 
 ![audit_flow](https://raw.githubusercontent.com/hb-chengli/ecs/master/audit_flow.jpg)
 
-*TODO*
+*TODO:*
 
 conrtacts checking
 
