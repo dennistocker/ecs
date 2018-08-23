@@ -66,7 +66,7 @@ struct currency_stats {
 3. 通过第三方安全团队的审核
 4. resign权限
 
-**审计流程**
+### 审计流程图
 
 ![audit_flow](https://raw.githubusercontent.com/hb-chengli/ecs/master/audit_flow.jpg)
 
