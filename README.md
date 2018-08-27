@@ -76,3 +76,48 @@ conrtacts checking
 
 ## 更新
 每次更新合约之后，需要重新进行审计流程。
+
+合约部署后，推荐使用自定义权限进行合约升级，同时resign owner权限和active权限。
+1. 设置自定义权限
+```
+cleos set account permission $CONTRACT $PERMISSION '{"threshold": 2, "keys": [], "accounts":[{"permission": {"actor": "$ACTOR_1">, "permission": "active"}, "weight": 1}, {"permission": {"actor": "$ACTOR_2", "permission": "active"}, "weight": 1}]}' active -p $CONTRACT
+```
+
+2. 给自定义权限设置setabi和setcode权限
+```
+cleos set action permission $CONTRACT eosio setabi $PERMISSION
+cleos set action permission $CONTRACT eosio setabi $PERMISSION
+```
+
+3. resign active权限和owner权限
+```
+cleos set account permission $CONTRACT active '{"threshold": 1, "keys": [], "accounts": [{ "permission": { "actor":"eosio.prods","permission":"active" }, "weight":1 }] }'  -p $CONTRACT
+
+cleos set account permission $CONTRACT owner '{"threshold": 1, "keys":[], "accounts":[{"permission":{"actor":"eosio.prods", "permission":"active"}, "weight": 1}]}' "" -p $CONTRACT@owner
+```
+更新合约时，使用多签进行更新
+1. 生成transaction文件
+```
+cleos set contract $CONTRACT $CONTRACT_DIR -s -j -d > contract.json
+```
+生成transaction文件后，可按需更改文件中transaction过期时间。
+
+2. 项目方发起propose
+```
+cleos multisig propose_trx $PROPOSE '[{"actor": "$ACTOR_1", "permission": "active"}, {"actor": "$ACTOR_2", "permission": "active"}]' contract.json $PROPOSER
+```
+发起propose时，使用的账号不能为合约账号。
+
+3. 审核方review后approve
+```
+cleos multisig review $PROPOSER $PROPOSE
+
+cleos multisig approve $PROPOSER $PROPOSE '{"actor": "$ACTOR_1", "permission": "active"}' -p $ACTOR_1
+
+cleos multisig approve $PROPOSER $PROPOSE '{"actor": "$ACTOR_2", "permission": "active"}' -p $ACTOR_2
+```
+
+4. 项目方exec
+```
+cleos multisig exec $PROPOSER $PROPOSE -p $PROPOSER
+```
